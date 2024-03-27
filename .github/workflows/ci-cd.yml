@@ -24,7 +24,6 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install --no-dev --optimize-autoloader
 
-      # Optionally, run Laravel specific commands like migration, seed, etc.
       - name: Prepare Laravel Application
         run: |
           php artisan key:generate
