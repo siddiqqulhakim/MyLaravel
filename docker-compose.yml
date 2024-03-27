@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:80"  # Adjust if you have a specific port you want to expose
+    restart: always
+    env_file:
+      - .env
+    entrypoint: /entrypoint.sh
+    volumes:
+      - .:/var/www/html
+      - ./entrypoint.sh:/entrypoint.sh
+
+volumes:
+  app_data: {}
