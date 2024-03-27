@@ -4,7 +4,7 @@ services:
   web:
     build: .
     ports:
-      - "8000:80"  # Adjust if you have a specific port you want to expose
+      - "8013:80" 
     restart: always
     env_file:
       - .env
