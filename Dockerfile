@@ -28,11 +28,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Set the working directory in the container
 WORKDIR /var/www/html
 
-# Copy the entire project directory to the container
+# Assuming your application's source code is copied to /var/www/html
 COPY . .
-
-# Install project dependencies, ignoring platform reqs for zip
-RUN composer install --no-scripts --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader
 
 # Expose port 80 for the Apache server
 EXPOSE 80
