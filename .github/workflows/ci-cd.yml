@@ -35,6 +35,10 @@ jobs:
           php artisan key:generate
           php artisan config:cache
           php artisan route:cache
+          php artisan cache:clear
+          php artisan config:clear
+          php artisan route:clear
+          php artisan view:clear
 
       - name: Build Docker Image
         run: docker-compose up -d --build
