@@ -15,11 +15,21 @@ jobs:
       - name: Setup Environment File
         run: |
           echo "APP_NAME=${{ secrets.APP_NAME }}" > .env
-          echo "APP_ENV=${{ secrets.APP_ENV }}" > .env
+          echo "APP_ENV=${{ secrets.APP_ENV }}" >> .env # Use >> to append instead of overwrite
           echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
           echo "LOG_CHANNEL=${{ secrets.LOG_CHANNEL }}" >> .env
           echo "LOG_LEVEL=${{ secrets.LOG_LEVEL }}" >> .env
+          # Include other necessary environment variables
 
+      - name: Install Composer Dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      # Optionally, run Laravel specific commands like migration, seed, etc.
+      - name: Prepare Laravel Application
+        run: |
+          php artisan key:generate
+          php artisan config:cache
+          php artisan route:cache
 
       - name: Build Docker Image
         run: docker-compose up -d --build
